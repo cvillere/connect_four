@@ -6,6 +6,8 @@ class GameBoard
 
   attr_accessor :board
 
+  include GameRules
+
   def initialize(board)
     @board = board
   end
@@ -22,6 +24,31 @@ class GameBoard
       puts x.join('')
     end
   end
+
+  def get_p1move
+    show_move_rules
+    puts 'Where would you like to put your (X)? Enter row, then column'
+    row = gets.to_i
+    column = gets.to_i
+    row -= 1
+    column -= 1
+    play = [row, column]
+    # check to make sure move is valid
+    # @board[play[0]][play[1]] = ' X '
+  end
+
+  def get_p2move
+    show_move_rules
+    puts 'Where would you like to put your (O)? Enter row, then column'
+    row = gets.to_i
+    column = gets.to_i
+    row -= 1
+    column -= 1
+    play = [row, column]
+    # check to make sure move is valid
+    # @board[play[0]][play[1]] = ' O '
+  end
+
 end
 
 #flow
@@ -30,7 +57,7 @@ board_structure = my_board.make_board
 board_display = my_board.display_board
 board_display
 
-#holds rules to
+#holds rules to show players at different points during the game
 module GameRules
 
   def show_game_rules
@@ -47,9 +74,18 @@ module GameRules
   end
 
   def show_move_rules
-    puts "1.Space chosen must be the lowest row or top of existing moves. 
-    Can't have gap in rows. 
+    puts "1.Space chosen must be the lowest row or on top of existing moves, 
+    without creating a gap in the rows.
     2. Space chosen must be available as new moves will not replace old moves."
   end
+end
+
+module ValidMoves
+
+  def check_pos_open
+
+  end
+
+  def 
 
 end
