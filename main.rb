@@ -80,12 +80,41 @@ module GameRules
   end
 end
 
+#functions to check whether move is valid
 module ValidMoves
 
-  def check_pos_open
-
+  
+  def check_empty_space_p1 (my_move)
+    blank_array = []
+    @board.each do |x|
+      blank_array.push(x[my_move[1]])
+    end
+    p1_new_move if blank_array[my_move[0]] != '[ ]'
   end
 
-  def 
+  def check_legality_p1(my_move)
+    legality_arr = []
+    @board.each do |x|
+      legality_arr.push(x[my_move[1]])
+    end
+    check_arr_p1(legality_arr, my_move)
+  end
+
+  def check_arr_p1(legality_arr, my_move)
+    cutdown_arr = legality_array[my_move[1]..]
+    cutdown_arr.each do |x|
+      p1_new_move if x == '[ ]'
+    end
+  end
+
+  def p1_legal_move (my_move)
+    check_empty_space_p1 (my_move)
+    check_legality_p1(my_move)
+  end
+
+  def p1_new_move
+    puts 'Bad move. Gonna need to try again.'
+    get_p1move
+  end
 
 end
